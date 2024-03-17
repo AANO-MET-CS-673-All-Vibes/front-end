@@ -692,7 +692,7 @@ nav ul li:hover::after {
 .p2{
     color: #ffffff;
     position: absolute;
-    top: 70%;
+    top: 50%;
     font-size: 150%;
     line-height: 1.3em;
     padding-top: 50px;

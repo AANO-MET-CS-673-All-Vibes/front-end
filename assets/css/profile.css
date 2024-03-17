@@ -2,6 +2,10 @@
     background: #B9B9B9;
 }
 
+.hidden{
+  display: none;
+}
+
 .card {
   --main-color: #090909;
   --bg-color: #fff;
@@ -157,7 +161,7 @@ CHAT MENU */
  --input-bg: #f8f8fa;
  --input-chat-color: #a2a2a2;
  --border-color: #eef2f4;
- --body-font: "Manrope", sans-serif;
+ --app-font: "Manrope", sans-serif;
  --body-color: #273346;
  --settings-icon-color: #c1c7cd;
  --msg-message: #969eaa;
@@ -265,8 +269,8 @@ CHAT MENU */
 img {
  max-width: 100%;
 }
-/* 
-body {
+
+/* body {
  background-color: var(--body-bg-color);
  font-family: var(--body-font);
  color: var(--body-color);
@@ -289,6 +293,11 @@ body {
  left: 27%;
  top: -1%;
  transform: scale(.9);
+ box-sizing: border-box;
+ -webkit-font-smoothing: antialiased;
+
+ font-family: var(--app-font);
+
 }
 
 .header {
@@ -309,7 +318,7 @@ body {
 
 .conversation-area,
 .detail-area {
- width: 340px;
+ width: 300px;
  flex-shrink: 0;
 }
 
@@ -344,8 +353,8 @@ body {
   background-repeat: no-repeat;
   background-size: 16px;
   background-position: 25px 48%;
-  font-family: var(--body-font);
-  font-weight: 600;
+  font-family: var(--app-font);
+  font-weight: 400;
   font-size: 15px;
   &::placeholder {
    color: var(--input-chat-color);
@@ -464,9 +473,10 @@ body {
  overflow: hidden;
 }
 
+/* this is the side chat content */
 .msg-content {
  font-weight: 500;
- font-size: 13px;
+ font-size: 15px;
  display: flex;
 }
 
@@ -595,6 +605,7 @@ body {
 
 .chat-msg-text {
  color: var(--chat-text-color);
+ font-family: var(--app-font);
 }
 
 .owner {
@@ -603,11 +614,15 @@ body {
   margin-left: 0;
   margin-right: 12px;
   align-items: flex-end;
+  font-family: var(--app-font);
+  font-weight: 500;
+ font-size: 15px;
  }
  .chat-msg-text {
   background-color: var(--theme-color);
   color: #fff;
   border-radius: 20px 20px 0 20px;
+  font-family: var(--app-font);
  }
  .chat-msg-date {
   left: auto;
@@ -721,7 +736,7 @@ body {
  background-repeat: no-repeat;
  background-size: 16px;
  background-position: 100%;
- font-family: var(--body-font);
+ font-family: var(--app-font);
  font-weight: 600;
  font-size: 14px;
  border-bottom: 1px solid var(--border-color);
@@ -737,7 +752,7 @@ body {
 
 .detail-change {
  color: var(--detail-font-color);
- font-family: var(--body-font);
+ font-family: var(--app-font);
  font-weight: 600;
  font-size: 14px;
  border-bottom: 1px solid var(--border-color);
@@ -839,20 +854,6 @@ body {
  }
 }
 
-.follow-text {
- display: flex;
- align-items: center;
- transition: 0.3s;
-}
-
-.follow-me:hover {
- .follow-text {
-  transform: translateY(100%);
- }
- .developer {
-  top: 0;
- }
-}
 
 .developer {
  position: absolute;
