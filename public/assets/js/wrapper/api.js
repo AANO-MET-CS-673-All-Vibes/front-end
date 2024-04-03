@@ -48,3 +48,15 @@ function login() {
     window.location.replace(api + "weblogin");
     return false;
 }
+
+async function callback() {
+    const p = new URLSearchParams(window.location.search);
+
+    const callbackResponse = await request("callback", {code:p.get("code")});
+
+    if(callbackResponse.exists) {
+        window.location.href = "/profile.html?id=" + callbackResponse.id + "&token=" + callbackResponse.token;
+    } else {
+        window.location.href = "/signup.html?code=" + p.get("code");
+    }
+}
