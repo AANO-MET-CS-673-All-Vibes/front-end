@@ -15,8 +15,6 @@ toggleButton.addEventListener('click', () => {
 });
 
 
-
-
 // shows heart when you click on match "play" button
 const submit = document.getElementById("play-button")
 const match = document.getElementById("match")
