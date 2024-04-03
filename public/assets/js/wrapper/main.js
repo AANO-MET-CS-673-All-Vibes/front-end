@@ -144,6 +144,8 @@ async function openChat(id) {
     console.log("opening chat with user " + id);
     currentMatch = id;
 
+    document.querySelector(".chat-area-footer").classList.remove("hidden");
+
     // mark the chat as open
     let msgs = document.querySelectorAll(".msg");
     for(let i = 0; i < msgs.length; i++) {
@@ -220,6 +222,30 @@ function renderText(message, contextId, myInfo, contextInfo) {
     return msg;
 }
 
+/*
+ * sendMessage(): sends a text to a match
+ */
+
+async function sendMessage() {
+    // TODO: someday handle attachment uploads here like photos, videos, etc
+
+    document.getElementById("new-msg").disabled = true;     // prevent changes while we use this
+
+    // and call the actual API
+    await request("send", {
+        from:getCookie("id"),
+        to:currentMatch,
+        text:document.getElementById("new-msg").value,
+        attachment:""   // TODO!!!
+    }, "POST");
+
+    await matchList();
+    await openChat(currentMatch);   // TODO: reload in a better way than this
+
+    document.getElementById("new-msg").value = "";
+    document.getElementById("new-msg").disabled = false;
+}
+
 window.onload = async function() {
     // save the authentication in a cookie
     const p = new URLSearchParams(window.location.search);
@@ -229,6 +255,12 @@ window.onload = async function() {
         setCookie("token", p.get("token"))
         window.location.href = "/profile.html";
     }
+
+    // install event handlers
+    document.getElementById("send-form").onsubmit = function() {
+        sendMessage();
+        return false;   // prevent actual redirect
+    };
 
     // TODO: request info on the current user to show their updated pfp
 

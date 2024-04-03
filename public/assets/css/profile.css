@@ -3,7 +3,7 @@
 }
 
 .hidden{
-  display: none;
+  visibility: hidden !important;
 }
 
 .card {
@@ -947,6 +947,7 @@ img {
  }
 }
 
-
-  
-  
+#send-form input[type=submit] {
+  display: none !important;
+  -webkit-appearance: none !important;  /* safari fix */
+}
