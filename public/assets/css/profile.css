@@ -172,7 +172,7 @@ CHAT MENU */
  --settings-icon-color: #c1c7cd;
  --msg-message: #969eaa;
  --chat-text-bg: #f1f2f6;
- --theme-color: #0086ff;
+ --theme-color: #c00060;
  --msg-date: #c0c7d2;
  --button-bg-color: #f0f7ff;
  --button-color: var(--theme-color);
@@ -180,7 +180,7 @@ CHAT MENU */
  --msg-hover-bg: rgba(238, 242, 244, 0.4);
  --active-conversation-bg: linear-gradient(
   to right,
-  rgba(238, 242, 244, 0.4) 0%,
+  rgba(238, 242, 244, 0.4) 0%, 
   rgba(238, 242, 244, 0) 100%
  );
  --overlay-bg: linear-gradient(
@@ -613,6 +613,11 @@ img {
 .chat-msg-text {
  color: var(--chat-text-color);
  font-family: var(--app-font);
+ background-color: #d8d8d8;
+ border-radius: 20px;
+ padding: 8px;
+ margin: 2px;
+ color: #000;
 }
 
 .owner {
@@ -626,9 +631,8 @@ img {
  font-size: 15px;
  }
  .chat-msg-text {
-  background-color: var(--theme-color);
+  background-color: var(--theme-color) !important; 
   color: #fff;
-  border-radius: 20px 20px 0 20px;
   font-family: var(--app-font);
  }
  .chat-msg-date {
