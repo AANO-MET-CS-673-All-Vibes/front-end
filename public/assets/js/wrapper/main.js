@@ -6,6 +6,7 @@
 /* Functions for the main page: matching and messaging */
 
 let suggestions, matches;
+let currentSuggestion, currentMatch;
 
 /*
  * matchList(): renders the list of matches in the chat area
@@ -82,6 +83,54 @@ async function matchListItem(id, person) {
     return msg;
 }
 
+/*
+ * suggestion(): renders one possible match suggestion
+ */
+
+async function suggestion(index) {
+    currentSuggestion = index;
+
+    let person = await request("userinfo", {id:suggestions.people[index].id});
+    if(person.status != "ok") {
+        return;
+    }
+
+    document.querySelector(".card__title").innerText = person.name;
+
+    let similarity;
+
+    if(suggestions.people[index].score == 0) {
+        similarity = "<em>You don't have any music in common with this person but you can still shoot your shot!</em>";
+    } else {
+        similarity = "You both like ";
+        if(suggestions.people[index].artists && suggestions.people[index].artists.length != 0) {
+            for(let i = 0; i < suggestions.people[index].artists.length; i++) {
+                similarity += suggestions.people[index].artists[i].name;
+                if(i == suggestions.people[index].artists.length-1) {
+                    similarity += ".";
+                } else if(i == suggestions.people[index].artists.length-2) {
+                    similarity += ", and ";
+                } else {
+                    similarity += ", ";
+                }
+            }
+        } else {
+            for(let i = 0; i < suggestions.people[index].tracks.length; i++) {
+                similarity += suggestions.people[index].tracks[i].name;
+                if(i == suggestions.people[index].tracks.length-1) {
+                    similarity += ".";
+                } else if(i == suggestions.people[index].tracks.length-2) {
+                    similarity += ", and ";
+                } else {
+                    similarity += ", ";
+                }
+            }
+        }
+    }
+
+    document.querySelector(".card__subtitle").innerHTML = similarity;
+}
+
 window.onload = async function() {
     // save the authentication in a cookie
     const p = new URLSearchParams(window.location.search);
@@ -107,5 +156,14 @@ window.onload = async function() {
         return;
     }
 
-    matchList();
+    await matchList();
+
+    // suggested matches
+    suggestions = await request("recs", {id:getCookie("id")});
+    if(suggestions.status != "ok") {
+        alert("failed to retrieve suggestions list");
+        return;
+    }
+
+    await suggestion(0);
 };
