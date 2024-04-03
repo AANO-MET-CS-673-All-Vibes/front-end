@@ -96,6 +96,7 @@ async function suggestion(index) {
     }
 
     document.querySelector(".card__title").innerText = person.name;
+    document.querySelector("progress").value = suggestions.people[index].score;
 
     let similarity;
 
