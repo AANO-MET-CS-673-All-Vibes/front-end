@@ -186,13 +186,13 @@ function renderText(message, contextId, myInfo, contextInfo) {
     const text = document.createElement("div");
 
     msg.classList.add("chat-msg");
-    if(contextId != contextInfo.id) {
+    if(contextId != message.from) {
         msg.classList.add("owner");
     }
 
     profile.classList.add("chat-msg-profile");
     img.classList.add("chat-msg-img");
-    if(contextId != contextInfo.id) {
+    if(contextId != message.from) {
         if(!myInfo.image) img.src = "/images/blank.png";
         else img.src = myInfo.image;
     } else {
@@ -206,7 +206,7 @@ function renderText(message, contextId, myInfo, contextInfo) {
 
     date.classList.add("chat-msg-date");
     date.innerText = message.timestamp;
-    
+
     content.classList.add("chat-msg-content");
     text.classList.add("chat-msg-text");
     text.innerText = message.text;
