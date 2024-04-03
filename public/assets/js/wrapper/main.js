@@ -44,6 +44,8 @@ async function matchListItem(id, person) {
     const date = document.createElement("span");
 
     msg.classList.add("msg");
+    msg.id = "msg-" + id;       // will be used to determine active chats
+
     profile.classList.add("msg-profile");
     detail.classList.add("msg-detail");
     username.classList.add("msg-username");
@@ -76,8 +78,8 @@ async function matchListItem(id, person) {
     content.appendChild(message);
     content.appendChild(date);
 
-    msg.onclick = function() {
-        //openChat(id);
+    msg.onclick = async function() {
+        await openChat(id);
     }
 
     return msg;
@@ -130,6 +132,92 @@ async function suggestion(index) {
     }
 
     document.querySelector(".card__subtitle").innerHTML = similarity;
+
+    // TODO: swipe left/right event handlers
+}
+
+/*
+ * openChat(): renders the conversation with a given match
+ */
+
+async function openChat(id) {
+    console.log("opening chat with user " + id);
+    currentMatch = id;
+
+    // mark the chat as open
+    let msgs = document.querySelectorAll(".msg");
+    for(let i = 0; i < msgs.length; i++) {
+        if(msgs[i].id == ("msg-" + id)) {
+            msgs[i].classList.add("active");
+        } else {
+            msgs[i].classList.remove("active");
+        }
+    }
+
+    // clear the conversation area
+    let container = document.querySelector(".chat-area-main");
+    container.innerHTML = "";
+
+    // retrieve message history
+    let history = await request("history", {id:getCookie("id"), context:id, page:0});
+    if(history.status != "ok" || history.count == 0) {
+        return false;
+    }
+
+    // for the profile pics
+    let myInfo = await request("userinfo", {id:getCookie("id")});
+    let contextInfo = await request("userinfo", {id:id});
+
+    // render the chat history -- this is in REVERSE chronological order
+    // so we start from the end of the array
+    for(let i = history.count-1; i >= 0; i--) {
+        container.appendChild(renderText(history.messages[i], id, myInfo, contextInfo));
+    }
+}
+
+/* Helper function for rendering chats */
+
+function renderText(message, contextId, myInfo, contextInfo) {
+    const msg = document.createElement("div");
+    const profile = document.createElement("div");
+    const img = document.createElement("img");
+    const date = document.createElement("div");
+    const content = document.createElement("div");
+    const text = document.createElement("div");
+
+    msg.classList.add("chat-msg");
+    if(contextId != contextInfo.id) {
+        msg.classList.add("owner");
+    }
+
+    profile.classList.add("chat-msg-profile");
+    img.classList.add("chat-msg-img");
+    if(contextId != contextInfo.id) {
+        if(!myInfo.image) img.src = "/images/blank.png";
+        else img.src = myInfo.image;
+    } else {
+        if(!contextInfo.image) img.src = "/images/blank.png";
+        else img.src = contextInfo.image;
+    }
+
+    if(img.src == null) {
+        img.src = "/images/blank.png";
+    }
+
+    date.classList.add("chat-msg-date");
+    date.innerText = message.timestamp;
+    
+    content.classList.add("chat-msg-content");
+    text.classList.add("chat-msg-text");
+    text.innerText = message.text;
+
+    msg.appendChild(profile);
+    profile.appendChild(img);
+    profile.appendChild(date);
+    msg.appendChild(content);
+    content.appendChild(text);
+
+    return msg;
 }
 
 window.onload = async function() {
