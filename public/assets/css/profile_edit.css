@@ -57,3 +57,13 @@ body{margin-top:20px;
         margin-left: 1rem;
         margin-right: 1rem;
     }
+
+    #agewarning {
+        box-sizing: border-box;
+        background-color: #ff9999;
+        border: 1px dashed #d42828;
+        color: #380000;
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 0.5em;
+    }
