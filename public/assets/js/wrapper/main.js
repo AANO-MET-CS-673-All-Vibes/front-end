@@ -175,6 +175,10 @@ async function openChat(id) {
     for(let i = history.count-1; i >= 0; i--) {
         container.appendChild(renderText(history.messages[i], id, myInfo, contextInfo));
     }
+
+    // and scroll to the bottom
+    const scroller = document.querySelector(".chat-area");
+    scroller.scrollTo(0, scroller.scrollHeight);
 }
 
 /* Helper function for rendering chats */
