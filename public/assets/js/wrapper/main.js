@@ -133,7 +133,12 @@ async function suggestion(index) {
 
     document.querySelector(".card__subtitle").innerHTML = similarity;
 
-    // TODO: swipe left/right event handlers
+    // event handlers to like/dislike this person
+    const like = document.getElementById("like-button");
+    const dislike = document.getElementById("dislike-button");
+
+    like.onclick = function() { attempt(true); }
+    dislike.onclick = function() { attempt(false); }
 }
 
 /*
@@ -248,6 +253,38 @@ async function sendMessage() {
 
     document.getElementById("new-msg").value = "";
     document.getElementById("new-msg").disabled = false;
+}
+
+/*
+ * attempt(): attempts to like/dislike a match
+ */
+
+async function attempt(like) {
+    let context = suggestions.people[currentSuggestion].id;
+    let likeint;
+    if(like) likeint = 1;
+    else likeint = 0;
+    
+    await request("attempt", {me:getCookie("id"), other:context, like:likeint}, "POST");
+
+    // refresh match list
+    matches = await request("matches", {id:getCookie("id")});
+    if(matches.status != "ok") {
+        // TODO: better error handling than this
+        alert("failed to retrieve match list");
+        return;
+    }
+
+    await matchList();
+
+    // suggested matches
+    suggestions = await request("recs", {id:getCookie("id")});
+    if(suggestions.status != "ok") {
+        alert("failed to retrieve suggestions list");
+        return;
+    }
+
+    await suggestion(0);
 }
 
 window.onload = async function() {
