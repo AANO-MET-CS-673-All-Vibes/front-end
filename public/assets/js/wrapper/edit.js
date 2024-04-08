@@ -35,4 +35,9 @@ window.onload = async function() {
     }, 250);
 
     document.getElementById("edit-form").onsubmit = function() { submitEdit(); return false; }
+
+    document.getElementById("pfp-uploader").onchange = function() {
+        document.getElementById("pfp").src = URL.createObjectURL(document.getElementById("pfp-uploader").files[0]);
+        document.getElementById("pfp-form").style.display = "block";
+    }
 };
