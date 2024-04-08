@@ -19,6 +19,7 @@ window.onload = async function() {
     if(userinfo.image) document.getElementById("pfp").src = userinfo.image;
     else document.getElementById("pfp").src = "/images/blank.png";
 
+    document.getElementById("name-preview").innerText = userinfo.name;
     document.getElementById("bio-preview").innerText = userinfo.bio;
     document.getElementById("bio").innerText = userinfo.bio;
     document.getElementById("name").value = userinfo.name;
