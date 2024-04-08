@@ -205,10 +205,10 @@ function renderText(message, contextId, myInfo, contextInfo) {
     img.classList.add("chat-msg-img");
     if(contextId != message.from) {
         if(!myInfo.image) img.src = "/images/blank.png";
-        else img.src = myInfo.image;
+        else img.src = api + myInfo.image;
     } else {
         if(!contextInfo.image) img.src = "/images/blank.png";
-        else img.src = contextInfo.image;
+        else img.src = api + contextInfo.image;
     }
 
     if(img.src == null) {
@@ -264,7 +264,7 @@ async function attempt(like) {
     let likeint;
     if(like) likeint = 1;
     else likeint = 0;
-    
+
     await request("attempt", {me:getCookie("id"), other:context, like:likeint}, "POST");
 
     // refresh match list
@@ -303,7 +303,9 @@ window.onload = async function() {
         return false;   // prevent actual redirect
     };
 
-    // TODO: request info on the current user to show their updated pfp
+    // request info on the current user to show their updated pfp
+    let userinfo = await request("userinfo", {id:getCookie("id")});
+    document.querySelector(".user-profile").src = api + userinfo.image;
 
     // TODO: update the server with the user's last seen time (i.e. make them appear online rn)
 

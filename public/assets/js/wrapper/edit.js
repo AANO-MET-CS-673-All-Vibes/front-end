@@ -13,10 +13,18 @@ async function submitEdit() {
     return false;
 }
 
+async function submitPfp() {
+    await request("edit/pfp", {
+        id:getCookie("id"),
+        data:document.getElementById("pfp-uploader").files[0]
+    }, "POST", true);
+}
+
 window.onload = async function() {
     let userinfo = await request("userinfo", {id:getCookie("id")});
     
-    if(userinfo.image) document.getElementById("pfp").src = userinfo.image;
+    // TODO: FIX THIS URL WHEN DEPLOYED
+    if(userinfo.image) document.getElementById("pfp").src = api + userinfo.image;
     else document.getElementById("pfp").src = "/images/blank.png";
 
     document.getElementById("name-preview").innerText = userinfo.name;
@@ -34,10 +42,12 @@ window.onload = async function() {
         document.getElementById("bio-preview").innerText = document.getElementById("bio").value;
     }, 250);
 
-    document.getElementById("edit-form").onsubmit = function() { submitEdit(); return false; }
+    document.getElementById("edit-form").onsubmit = function() { submitEdit(); return false; };
 
     document.getElementById("pfp-uploader").onchange = function() {
         document.getElementById("pfp").src = URL.createObjectURL(document.getElementById("pfp-uploader").files[0]);
         document.getElementById("pfp-form").style.display = "block";
-    }
+    };
+
+    document.getElementById("pfp-form").onsubmit = function() { submitPfp(); return false; }
 };
