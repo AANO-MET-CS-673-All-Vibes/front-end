@@ -105,24 +105,37 @@ async function suggestion(index) {
     if(suggestions.people[index].score == 0) {
         similarity = "<em>You don't have any music in common with this person but you can still shoot your shot!</em>";
     } else {
+        let len;
         similarity = "You both like ";
         if(suggestions.people[index].artists && suggestions.people[index].artists.length != 0) {
-            for(let i = 0; i < suggestions.people[index].artists.length; i++) {
+            if(suggestions.people[index].artists.length >= 4) {
+                len = 4;
+            } else {
+                len = suggestions.people[index].artists.length;
+            }
+
+            for(let i = 0; i < len; i++) {
                 similarity += suggestions.people[index].artists[i].name;
-                if(i == suggestions.people[index].artists.length-1) {
+                if(i == len-1) {
                     similarity += ".";
-                } else if(i == suggestions.people[index].artists.length-2) {
+                } else if(i == len-2) {
                     similarity += ", and ";
                 } else {
                     similarity += ", ";
                 }
             }
         } else {
-            for(let i = 0; i < suggestions.people[index].tracks.length; i++) {
+            if(suggestions.people[index].tracks.length >= 4) {
+                len = 4;
+            } else {
+                len = suggestions.people[index].tracks.length;
+            }
+
+            for(let i = 0; i < len; i++) {
                 similarity += suggestions.people[index].tracks[i].name;
-                if(i == suggestions.people[index].tracks.length-1) {
+                if(i == len-1) {
                     similarity += ".";
-                } else if(i == suggestions.people[index].tracks.length-2) {
+                } else if(i == len-2) {
                     similarity += ", and ";
                 } else {
                     similarity += ", ";
