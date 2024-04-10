@@ -56,7 +56,7 @@ async function matchListItem(id, person) {
     if(person.image == null) {
         profile.src = "/images/blank.png";
     } else {
-        profile.src = person.img;
+        profile.src = api + person.image;
     }
 
     username.innerText = person.name;
@@ -145,6 +145,13 @@ async function suggestion(index) {
     }
 
     document.querySelector(".card__subtitle").innerHTML = similarity;
+
+    // pfp
+    if(person.image) {
+        document.getElementById("suggestion-pfp").src = api + person.image;
+    } else {
+        document.getElementById("suggestion-pfp").src = "/images/blank.png";
+    }
 
     // event handlers to like/dislike this person
     const like = document.getElementById("like-button");

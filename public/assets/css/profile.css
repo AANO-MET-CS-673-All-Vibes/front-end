@@ -339,6 +339,8 @@ img {
 
 .chat-area {
  flex-grow: 1;
+ position: relative;
+ overflow-x: hidden !important;
 }
 
 .search-bar {
@@ -653,9 +655,10 @@ img {
  padding: 10px 20px;
  align-items: center;
  background-color: var(--theme-bg-color);
- position: sticky;
+ position: absolute;
  bottom: 0;
  left: 0;
+ z-index: 100000000;
 }
 
 .chat-area-footer svg {
@@ -947,7 +950,22 @@ img {
  }
 }
 
+#send-form {
+  width: 90%;
+}
+
+#new-msg {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 #send-form input[type=submit] {
   display: none !important;
   -webkit-appearance: none !important;  /* safari fix */
+}
+
+.chat-area-main {
+  /*min-width: 40vw;
+  max-width: 50vw;*/
+  width: 40vw;
 }
