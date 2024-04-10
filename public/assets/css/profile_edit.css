@@ -67,3 +67,16 @@ body{margin-top:20px;
         padding: 0.5em;
         margin-bottom: 0.5em;
     }
+
+    /* atp it's honestly making me mad how much weird behavior safari has, but
+       nevertheless, safari fixes i guess */
+
+    input[type=date] {
+        -webkit-appearance: none;
+    }
+
+    input[type=date]::-webkit-datetime-edit {
+        display: block;
+        padding: 0;
+    }
+    
