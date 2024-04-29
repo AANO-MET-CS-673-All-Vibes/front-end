@@ -42,8 +42,13 @@ body{margin-top:20px;
     }
     
     .nav-borders .nav-link.active {
+<<<<<<< HEAD:assets/css/signup.css
         color: #0061f2;
         border-bottom-color: #0061f2;
+=======
+        color: #562f5f;
+        border-bottom-color: #562f5f;
+>>>>>>> integration:public/assets/css/signup.css
     }
     .nav-borders .nav-link {
         color: #69707a;

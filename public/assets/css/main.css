@@ -1323,4 +1323,12 @@ hr, .hr1{
   background-color: rgba(111, 111, 111, 0.80);
 } */
 
-
+#signup-form a {
+  margin-top: 3em !important;
+  color: #fff !important;
+  background-color: #1DB954;
+  padding: 0.4em 1.2em;
+  border-radius: 2em;
+  font-size: 105%;
+  font-weight: bold;
+}
