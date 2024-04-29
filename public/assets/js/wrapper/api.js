@@ -4,7 +4,7 @@
  */
 
 // root of the API
-const api = "http://127.0.0.1:5000/";   // TODO: replace this when we reach deployment obviously
+const api = "/api/";   // localhost:5000/ for development, /api/ for production
 
 /*
  * getCookie(): returns the value associated with a cookie
