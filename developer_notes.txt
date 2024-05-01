@@ -1,3 +1,0 @@
-https://www.youtube.com/watch?v=SqcY0GlETPk&ab_channel=ProgrammingwithMosh
-
-launch local server: npm run dev
