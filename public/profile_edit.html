@@ -53,7 +53,7 @@
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="name">Name</label>
-                                    <input class="form-control" id="name" autocomplete="off" name="name" type="text" placeholder="Enter your name">
+                                    <input minlength="2" maxlength="30" class="form-control" id="name" autocomplete="off" name="name" type="text" placeholder="Enter your name">
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
@@ -77,7 +77,7 @@
                             <!-- Form Group (bio)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="bio">Bio</label>
-                                <textarea class="form-control" id="bio" name="bio" type="text" placeholder="Tell your matches about yourself!"></textarea>
+                                <textarea maxlength="299" class="form-control" id="bio" name="bio" type="text" placeholder="Tell your matches about yourself!"></textarea>
                             </div>
                             <!-- Form Row-->
                             <!--<div class="row gx-3 mb-3">
