@@ -18,16 +18,6 @@
         </nav>
         <hr class="mt-0 mb-4">
         <div class="row" style="align-items: center;">
-            <!--<div class="col-xl-4">
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Profile Picture</div>
-                    <div class="card-body text-center">
-                        <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                        <button class="btn btn-primary" type="button">Upload image</button>
-                    </div>
-                </div>
-            </div>-->
             <div class="col-xl-9">
                 <!-- Account details card-->
                 <div class="card mb-4">
@@ -39,7 +29,7 @@
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="name">Name (this will be publicly visible)</label>
-                                    <input class="form-control" id="name" name="name" type="text" autocomplete="off" required placeholder="Enter your name">
+                                    <input minlength="2" maxlength="30" class="form-control" id="name" name="name" type="text" autocomplete="off" required placeholder="Enter your name">
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
